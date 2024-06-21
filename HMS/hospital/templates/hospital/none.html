@@ -1,0 +1,56 @@
+def uchafu(request, year=datetime.datetime.now().year,month=datetime.datetime.now().strftime('%B')):
+    if request.method == "POST":
+        fromdate = request.POST.get('fromdate')
+        enddate = request.POST.get('enddate')
+
+        result = KawaidaDozi.objects.raw('select id, name, time_stamp, total from KAWAIDA_DOZI where time_stamp between "'+fromdate+'" and "'+enddate+'" ')
+        context = {
+        
+        "queryset":result,
+        }
+        
+    
+        return render(request, 'hospital/daily_amount.html', context)
+    else:
+        name = "john"
+        month = month.capitalize()
+
+        month_number = list(calendar.month_name).index(month)
+        month_number = int(month_number)
+
+        cal = HTMLCalendar().formatmonth(
+            year,
+            month_number
+
+
+            )
+        now = datetime.datetime.now()
+        current_year = now.year
+
+        event_list = KawaidaDozi.objects.filter(
+            time_stamp__year = year,
+            time_stamp__month = month_number
+
+            )
+
+        time = now.strftime('%I:%M %p')
+
+        
+
+            
+        context = {
+            
+            
+            "event_list": event_list,
+            "name": name,
+            "year": year,
+            "month": month,
+            "month_number": month_number,
+            "cal": cal,
+            "current_year": current_year,
+            "time": time,
+            
+        }
+           
+
+        return render(request, 'hospital/uchafu.html', context)

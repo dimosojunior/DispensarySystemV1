@@ -1,0 +1,284 @@
+{% load static %}
+ <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.css' %}">
+
+<script src="{% static 'hospital/assets/js/myjs.js' %}" type="text/javascript"></script>
+
+<link href="{% static 'hospital/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+<style type="text/css">
+  input::placeholder{
+    color: white;
+ }
+
+ input[type="checkbox"]{
+  width: 40px;
+  height: 40px;
+}
+form label{
+  color: white;
+}
+input{
+  margin-bottom: 0px;
+}
+
+#tag{
+  margin-bottom: 0px;
+  width: 88%;
+}
+
+
+
+.header-label{
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
+form select{
+ /* background-color: red;*/
+ background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+ color: white;
+ border: 1px solid white;
+ padding: 20px;
+}
+
+.select-input{
+  background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+  padding: 10px;
+  height: 50px;
+  color: green;
+  border: 1px solid white;
+  font-weight: bold;
+}
+
+</style>
+
+
+
+<div>
+
+  
+      
+    <form action="" method="POST" >
+      {% csrf_token %}
+
+      <div class="row">
+
+        <div class="col-md-8">
+
+          <h3 class="header-label"> 
+             {{form.name.label}} </h3>
+           {{form.name}}
+          
+        </div>
+
+          <div class="col-md-3">
+            <h3 class="header-label"> 
+             {{form.huduma.label}} </h3>
+            {{form.huduma}}
+
+          </div>
+
+
+            
+      </div><!--mwisho wa row ya field za juu--->
+
+
+
+<div class="row">
+
+  <div class="col-md-2">
+    <h3 class="header-label"> {{form.line_one.label}} </h3>
+    {{form.line_one}}
+     
+   
+
+    
+  </div>
+
+    <div class="col-md-2">
+     <h3 class="header-label"> {{form.line_two.label}} </h3>
+    {{form.line_two}}
+
+   
+
+    
+  </div>
+
+    <div class="col-md-2">
+    <h3 class="header-label"> {{form.line_three.label}} </h3>
+    {{form.line_three}}
+
+  
+
+    
+  </div>
+
+    <div class="col-md-2">
+    <h3 class="header-label"> {{form.line_four.label}} </h3>
+    {{form.line_four}}
+
+  
+
+    
+  </div>
+
+    <div class="col-md-2">
+    <h3 class="header-label"> {{form.line_five.label}} </h3>
+    {{form.line_five}}
+
+  
+
+    
+  </div>
+
+
+
+
+
+</div><!--mwisho wa row kubwa---->
+
+
+  
+
+</div>
+
+
+<div>
+
+
+<div class="row" style="margin-left: 0px;margin-top: 20px;">
+
+  <div class="col-md-2">
+    <h3 class="header-label" id="id_line_six_label"> {{form.line_six.label}} </h3>
+    {{form.line_six}}
+
+    
+
+    
+  </div>
+
+    <div class="col-md-2">
+    <h3 class="header-label" id="id_line_seven_label"> {{form.line_seven.label}} </h3>
+    {{form.line_seven}}
+
+
+    
+  </div>
+
+    <div class="col-md-2">
+    <h3 class="header-label" id="id_line_eight_label"> {{form.line_eight.label}} </h3>
+    {{form.line_eight}}
+
+    
+  </div>
+
+    <div class="col-md-2">
+    <h3 class="header-label" id="id_line_nine_label"> {{form.line_nine.label}} </h3>
+    {{form.line_nine}}
+
+
+    
+  </div>
+
+    <div class="col-md-2">
+    <h3 class="header-label" id="id_line_ten_label"> {{form.line_ten.label}} </h3>
+    {{form.line_ten}}
+
+   
+
+   
+
+    
+  </div>
+
+
+</div><!--mwisho wa row kubwa---->
+
+
+</div>
+
+
+
+
+
+
+<!-- mwanzo wa row ya buttons -->
+<div class="row" style="margin-top: 10px;margin-bottom: 15px;margin-left: 20px;">
+
+  <div class="col-md-3">
+   <button id="more-line" type="button" class="btn btn-success">Show / Hide More Lines</button>
+     >
+  </div>
+
+  <div class="col-md-6">
+    <button type="submit" class="btn btn-primary btn-md my-2 p" style="width: 80%;">
+      Submit</button>
+  </div>
+
+  <!-- <div class="col-md-3">
+    <button id="continue" type="button" class="btn btn-success btn-md my-2 p">
+      Continue</button>
+  </div> -->
+  
+</div>
+<!-- mwisho wa row ya buttons -->
+
+
+
+</div>
+
+
+
+
+
+
+
+</form>
+
+</div><!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'hospital/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'hospital/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+
+<script >
+  $( function() {
+
+
+    $("#tag"). autocomplete({
+    source: "{% url 'search_mtoto' %}"
+  });
+
+
+
+  } );
+
+  
+
+</script>
+
+
+<script >
+  $( function() {
+
+
+    $(".input"). autocomplete({
+    source: "{% url 'search_clinic_service_autocomplete' %}"
+  });
+
+
+
+  } );
+
+  
+
+</script>

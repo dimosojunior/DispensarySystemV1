@@ -1,0 +1,239 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DISPENSARY MANAGEMENT SYSTEM</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="{% static 'admini/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admini/vendors/base/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'admini/css/style.css' %}">
+    </head>
+  <body>
+    <div class="container-scroller">
+        <div class="pro-banner" id="pro-banner">
+            <div class="card pro-banner-bg border-0 rounded-0">
+              <div class="card-body py-3 px-4 d-flex align-items-center justify-content-between flex-wrap">
+              
+                <div class="d-flex">
+                  <a href="{% url 'home' %}" target="_blank" class="btn btn-outline-light mr-2">Go to the System</a>
+                  <a href="{% url 'user_logout' %}" target="_blank" class="btn btn-outline-light mr-2 bg-white text-dark">LogOut</a>
+                
+                </div>
+            </div>
+          </div>
+        </div>
+    <!-- partial:partials/_horizontal-navbar.html -->
+    <div class="horizontal-menu">
+      <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+        <div class="container-fluid">
+          <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+            <ul class="navbar-nav navbar-nav-left">
+              <li class="nav-item ml-0 mr-5 d-lg-flex d-none">
+                <a href="#" class="nav-link horizontal-nav-left-menu"><i class="mdi mdi-format-list-bulleted" style="color: black;"></i></a>
+              </li>
+                          
+              <li class="nav-item nav-search d-none d-lg-block ml-3">
+              
+
+
+              </li> 
+            </ul>
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href="index.html"><h1 style="font-family: bold;">DISPENSARY MANAGEMENT SYSTEM</h1></a>
+              
+            </div>
+          
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle" style="color: red;">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <nav class="bottom-navbar">
+        <div class="container">
+            <ul class="nav page-navigation">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="mdi mdi-file-document-box menu-icon"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="mdi mdi-cube-outline menu-icon"></i>
+                    <span class="menu-title">Registered Patients</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+                  <div class="submenu">
+                      <ul>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'PatientCategoriesPage' %}">Patients</a></li>
+                          
+                      </ul>
+                  </div>
+              </li>
+
+   <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="mdi mdi-cube-outline menu-icon"></i>
+                    <span class="menu-title">Saved Patients</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+                  <div class="submenu">
+                      <ul>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'SavedPatients_list' %}">Dawa</a></li>
+
+                          <li class="nav-item"><a class="nav-link" href="{% url 'SavedPatients_list_Vipimo' %}">Vipimo</a></li>
+                        
+                      </ul>
+                  </div>
+              </li>
+
+  
+
+            </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-6 mb-4 mb-xl-0">
+              <div class="d-lg-flex align-items-center">
+                <div>
+                  <h3 class="text-dark font-weight-bold mb-2">Hi, welcome {{ user.username }}</h3>
+                                 </div>
+                <div class="ml-lg-5 d-lg-flex d-none">
+                  
+
+
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center justify-content-md-end">
+              
+              <marquee>
+                <h1 style="color: blue;font-weight: bold;font-family: bold;">DISPENSARY <span style="color: red;font-weight: bold;font-family: bold;"> MANAGEMENT SYSTEM </span></h1>
+              </marquee>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-6">
+            <div class="col-lg-8 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <a href="#">
+                      
+                        <img src="{% static 'hospital/assets/images/H.jpg' %}" style="width: 200px;height: 200px;" class="d-block w-100" alt="...">
+                      <p class="mt-3 mb-4 mb-lg-0"><!--Lorem ipsum dolor sit amet,
+                        consectetur adipisicing elit.--->
+                      </p>
+                      </a>
+                    </div>
+
+                 
+                    <div class="col-lg-6">
+                      <h4 class="card-title">Our Best Services</h4>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="progress progress-lg grouped mb-2">
+                            <div class="progress-bar  bg-danger" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                        <div class="col-sm-12" style="font-weight: bold;">
+                          <ul class="graphl-legend-rectangle">
+                            <li><span class="bg-danger"></span>Diagnosis of diseases (85%)</li>
+                            <li><span class="bg-warning"></span>Treatment (90%)</li>
+                            <li><span class="bg-info"></span>Medical and Surgical (25%)</li>
+                            <li><span class="bg-success"></span>Sick and the Injured. (50%)</li>
+                           
+                          </ul>
+                        </div>
+                      </div>
+                      <p class="mb-0 mt-2">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-3 mb-lg-0">
+              <div class="">
+                <div class="card-body pb-0">
+                <img src="{% static 'hospital/assets/images/4.jpeg' %}" style="width: 100px;height: 200px;" class="d-block w-100" alt="...">
+                  <h2 style="font-weight: bold;color: red;font-family: bold;font-size: 16px;margin-top: 15px;">
+                    ALL AVAILABLE SERVICES
+                  </h2>
+                     <a href="{% url 'Clinic_services_Categories_Page' %}" class="btn btn-primary btn-md my-0 p" type="submit">Click To View</a>
+
+                      <a href="{% url 'add_available_medicines' %}" class="btn btn-primary btn-md my-0 p" type="submit">Add New Medicine</a>
+
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="footer-wrap">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block" style="color: black;">Copyright @Dispensary Management System 2023</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center" style="color: black;"> Dispensary Management System <a href="#" target="_blank" style="color: black;">Admin dashboard</a> </span>
+            </div>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- base:js -->
+    <script src="{% static 'admini/vendors/base/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="{% static 'admini/js/template.js' %}"></script>
+    <!-- endinject -->
+    <!-- plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <script src="{% static 'admini/vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'admini/vendors/progressbar.js/progressbar.min.js' %}"></script>
+    <script src="{% static 'admini/vendors/chartjs-plugin-datalabels/chartjs-plugin-datalabels.js' %}"></script>
+    <script src="{% static 'admini/vendors/justgage/raphael-2.1.4.min.js' %}"></script>
+    <script src="{% static 'admini/vendors/justgage/justgage.js' %}"></script>
+    <!-- Custom js for this page-->
+    <script src="{% static 'admini/js/dashboard.js' %}"></script>
+    <!-- End custom js for this page-->
+  </body>
+</html>

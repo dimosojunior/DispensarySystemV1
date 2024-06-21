@@ -1,0 +1,130 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% block title %}Lists {% endblock %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patients Categories</title>
+  <style>
+    body{
+  
+}
+  </style>
+</head>
+<body class="slider">
+  
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services" >
+      <div class="container">
+        <center>
+
+        <div class="section-title" style="margin-top: 30px">
+          <h2 style="color: white;font-weight: bold;">Patients Categories</h2>
+          </div>
+
+           {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+        <div class="row"style="justify-content: center;align-items: center;align-content: center;">
+          {% if category %}
+
+          {% for x in category %}
+
+          <div class="col-md-4 doctor-dawa-dozi" style="">
+        <div class="icon-box">
+              <div class="icon"><i class="fas fa-user"></i></div>
+              <h4><a href="{% url 'PatientRegistration_list' x.id %}">{{x.CategoryName}}</a></h4>
+          
+          </div>
+            
+          </div>
+          {% endfor %}
+
+          {% else %}
+
+           <h4 class="mt-5 pt-4" style="color: white;font-weight: bold;text-align: center;">No any patient category is added</h4>
+
+
+        
+            
+          
+          {% endif %}
+          
+         
+
+        </div><!--mwisho wa row kubwa--->
+
+
+
+
+
+</center>
+    
+
+
+
+
+
+
+<!--------------------------PAGINATION-------------------------------------->
+
+  <br><br>
+<div style="background-color: white;font-size: 18px;color: blue;">
+<center>
+ <h2 style="font-size: 17px;color: black;"> page {{category.number}} of {{category.paginator.num_pages}}</h2>
+{% if category.has_previous %}
+<a href="?page=1" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">   &laquo First</a>
+<a href="?page={{category.previous_page_number}}"style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Previous</a>
+{% endif %}
+
+
+
+{% if category.has_next %}
+<a href="?page={{category.next_page_number}}" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Next</a>
+<a href="?page={{category.paginator.num_pages}}" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Last &raquo</a>
+
+{% endif %}
+
+</center>
+</div>
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </section><!-- End Services Section -->
+
+
+    
+
+
+</body>
+</html>
+{% endblock %}

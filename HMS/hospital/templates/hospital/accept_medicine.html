@@ -1,0 +1,59 @@
+
+                
+
+<button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#accept">
+  Accept Medicine
+</button>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="accept" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Delete {{object.line_one}} </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+    <h3>Are you sure you want to Accept ??</h3><br>
+
+
+    
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+
+          <div class="form-group">
+                  <form action="{% url 'single_list_detail' object.pk %}" method="POST">
+                    {% csrf_token %}
+                    
+           <!--      <input type="date" name="date" class="form-control" >--->
+                 
+                </div>
+                <input hidden=true name="appointment-id" value="{{object.id}}">
+
+                    
+           <button type="submit" class="btn btn-primary btn-md my-0 p" name="date" >
+              Accept
+
+
+               </button>
+              </form>
+
+         
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div><!---mwisho wa modal---->

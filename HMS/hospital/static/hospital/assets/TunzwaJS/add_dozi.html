@@ -1,0 +1,137 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Add Dawa {% endblock %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+   
+
+
+
+ <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.css' %}">
+
+   <!--   <script src="{% static 'hospital/assets/js/myjs.js' %}" type="text/javascript"></script> -->
+
+
+
+    <style>
+     
+      form{
+        margin-bottom: 30px;
+        padding: 50px;
+
+      }
+      .batani{
+        background-color: blue;
+        width: 4cm;
+        color: white;
+        border-radius: 10px;
+        padding: 5px;
+      }
+      
+      #more-line{
+        /*background-color: green;*/
+        border-radius: 8px;
+        padding: 10px;
+        color: white;
+        
+      }
+
+
+
+    </style>
+</head>
+<body class="body-wrapper" style="">
+
+
+
+
+    <div style="margin-top: 100px;">
+     {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
+
+      <center>
+        <h1 style="color: white;font-weight: bold;font-family: bold;font-size: 18px;margin-bottom: 20px;">ADD MEDICINE</h1>
+      </center>
+   
+
+ <div class="container-fluid">
+
+
+
+
+
+{% include 'hospital/updates_dozi.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'hospital/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'hospital/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+
+<script >
+  $( function() {
+
+
+    $("#tag"). autocomplete({
+    source: "{% url 'search_mtoto' %}"
+  });
+
+
+
+  } );
+
+  
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
+
+{% endblock %}

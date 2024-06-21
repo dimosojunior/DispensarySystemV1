@@ -1,0 +1,38 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% block title %}Our Workers {% endblock %}
+
+
+{% block content %}
+
+      <!-- ======= Doctors Section ======= -->
+      <section id="doctors" class="doctors">
+        <div class="container">
+  
+          <div class="section-title">
+            <h2>Doctors</h2>
+             </div>
+  
+          <div class="row">
+             {% for x in doct %}
+            <div class="col-lg-6">
+              <div class="member d-flex align-items-start">
+                <div class="pic"><img src="{{x.image.url}}" class="img-fluid" alt=""></div>
+                <div class="member-info">
+                  <h4>{{x.title}}</h4>
+                  <span>{{x.status}}</span>
+                   
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+  
+               </div>
+  
+        </div>
+      </section><!-- End Doctors Section -->
+ 
+
+
+
+{% endblock %}

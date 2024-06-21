@@ -1,0 +1,386 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>View patient</title>
+    <style type="text/css">
+      
+        body{
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /*background: #333;*/
+        }
+        .container{
+           
+            
+            /*padding: 80px 40px;*/
+            justify-content: center;
+            align-items: center;
+           
+            margin-top: 0px;
+            
+        }
+
+     .display-text{
+        
+        background-color: #333;
+        /*margin-right: 150px;
+        margin-left: 150px;*/
+        border-width: 2px;
+        border-color: white;
+        border: 1px solid white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+       /* margin: 10px;*/
+        
+     }
+     .display-text-2{
+        margin-left: 20px;
+        margin-top: 10px;
+
+     }
+
+     .fees-informations{
+        color: white;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 30px;
+     }
+
+
+    </style>
+</head>
+<body class="body-wrapper">
+
+
+
+
+ <div class="container" style="margin-top: 80px;">
+
+
+
+
+
+
+ 
+
+ <div class="container">
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <h3 style="color: red;font-size: 14px;font-weight: bold;">{{message}}</h3><br>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <br>
+            {% endfor %}
+        {% endif %}
+     
+ 
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+      
+    {% if query %}
+
+    <h3 style="color: red;font-weight: bold;font-size: 16px;">{% with results.count as total_results %}
+    found {{total_results}} Patient(s)
+    {% endwith %}
+</h3>
+
+
+
+
+
+
+
+
+
+
+
+ <h2 style="color: white;font-size: 25px;text-align: center;margin-bottom: 20px;">Patient Details - VIPIMO</h2>
+
+       
+
+
+
+
+ {% for x in results %}
+
+    <!-- mwanzo wa row -->
+     <div id="year-Container" class="row student-informations-container" style="width: 100%;">
+
+     
+        
+        <div class="col-md-5 display-text">
+            
+       
+
+          <img src="{% static 'hospital/assets/img/kkk.jpg' %}" class="large-img" style="border-radius: 300px;width: 70px;height: 70px;margin-bottom: 15px;">
+
+          
+
+         <h3 style="color: yellow;font-weight: bold;font-size: 16px;">Patient Name : <span style="color: white;font-weight: bold;font-size: 16px;margin-left: 20px;">{{x.name}}</span></h3>
+
+         <h3 style="color: yellow;font-weight: bold;font-size: 16px;">Service Type: <span style="color: white;font-weight: bold;font-size: 16px;margin-left: 20px;">{{x.huduma}}</span></h3>
+
+
+          
+      <a href="{% url 'add_dozi' %}">
+       <button style="border-radius: 10px;padding: 10px;background: green;color: white;font-size: 16px;margin-top: 15px;margin-right: 20px;">Add Medicine</button> </a>
+       
+      
+
+
+       
+
+  
+
+  
+   </div>
+
+
+
+    <div class="col-md-5 display-text-2">
+
+        <h3 class="fees-informations">Comments</h3>
+        <p style="color: white;">
+            {% if x.comments %}
+          {{x.comments}}
+            {% else %}
+            <h2 style="color: white;font-size: 16px;text-align: center;">No any Comment</h2>
+            {% endif %}
+        </p>
+
+
+
+        </div>
+
+   
+
+   
+         
+     </div>
+     <!-- mwisho wa row -->
+
+     {% endfor %}
+
+
+
+
+
+
+
+
+
+{% for querySet in results  %}
+   <section id="description-container" class="mb-4 mt-2" style="box-shadow: -10px 10px  10px rgba(0,0,0,0.3)">
+
+    
+ <center>       
+<button type="button" class="btn btn-success" style="width: 50%;background-color: blue;margin-bottom: 10px;">
+  {{querySet.huduma}} for  {{querySet.name}}
+</button>
+</center> 
+
+
+     <div class="table-responsive text-nowrap" >
+          
+          <table class="table table-bordered" style="box-shadow: -10px 10px  10px rgba(0,0,0,0.3)">
+            <thead>
+              <tr>
+                
+                <th scope="col">Medicine Name</th>
+                
+                <th scope="col">Description</th>
+
+               
+                
+              </tr>
+            </thead>
+            <tbody>
+
+            {% if querySet.line_one != '' %}    
+            <tr>
+              
+                <td>{{querySet.line_one}}</td>
+                <td>{{querySet.line_one_description}}</td> 
+              
+                                  
+            </tr>
+            {% endif %} 
+
+
+         {% if querySet.line_two != '' %}
+            <tr>
+              
+                <td>{{querySet.line_two}}</td>
+                <td>{{querySet.line_two_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+
+         {% if querySet.line_three != '' %}
+            <tr>
+              
+                <td>{{querySet.line_three}}</td>
+                <td>{{querySet.line_three_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+
+          {% if querySet.line_four != '' %}
+            <tr>
+              
+                <td>{{querySet.line_four}}</td>
+                <td>{{querySet.line_four_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+
+            {% if querySet.line_five != '' %}
+            <tr>
+              
+                <td>{{querySet.line_five}}</td>
+                <td>{{querySet.line_five_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+            {% if querySet.line_six != '' %}
+            <tr>
+              
+                <td>{{querySet.line_six}}</td>
+                <td>{{querySet.line_six_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             {% if querySet.line_seven != '' %}
+            <tr>
+              
+                <td>{{querySet.line_seven}}</td>
+                <td>{{querySet.line_seven_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+            {% if querySet.line_eight != '' %}
+            <tr>
+              
+                <td>{{querySet.line_eight}}</td>
+                <td>{{querySet.line_eight_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             {% if querySet.line_nine != '' %}
+            <tr>
+              
+                <td>{{querySet.line_nine}}</td>
+                <td>{{querySet.line_nine_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             {% if querySet.line_ten != '' %}
+            <tr>
+              
+                <td>{{querySet.line_ten}}</td>
+                <td>{{querySet.line_ten_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             <tr style="background-color: green;color: white;"> 
+              
+                <th >Total Amount: </th>
+                <td >Tsh.{{querySet.total|floatformat:0|intcomma}}/=</td>
+
+                                  
+            </tr>
+
+
+            
+
+
+
+
+
+                        
+            </tbody>
+          </table>
+     </div>
+      </section>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+   <center>
+       <h1 style="font-size: 16px;color: white;font-weight: bold;">There is no any data</h1>
+   </center>
+
+   {% endif %}
+
+
+<!-- <hr style="height: 10px;color: white;background-color: red;font-weight: bold;border: 2px solid red;border-width: 2px;">
+ -->
+
+
+
+
+
+
+     </div>
+     <!-- mwisho wa container -->
+ 
+
+
+
+
+</div>
+
+
+</body>
+</html>
+
+{% endblock %}

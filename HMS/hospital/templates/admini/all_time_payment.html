@@ -1,0 +1,210 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% block title %}Amount collected {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+
+  
+ <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.css' %}">
+
+ 
+</head>
+<body>
+  
+   
+
+
+  <style>
+      body{
+  background: linear-gradient(90deg, #ff00bf9b 0%, #c6ff6932 43%, #0099ff9d 100%);
+}
+
+    .small-img{
+      width: 70px;
+      height: 70px;
+    }
+    td{
+        font-size: 20px;
+        font-family: bold;
+    }
+  </style>
+  <main class="mt-5 pt-4">
+    <div class="container" style="margin-top: 4cm;">
+        {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
+
+
+<div class="container " style="margin-top: 5cm;">
+
+
+</div>
+
+
+<div>
+  <center>
+  
+
+
+
+
+
+
+
+
+      <section class="mb-4">
+
+            <center>
+       <!-- <h1>All Normal Patient For {{ myDate|date:'Y-m-d H:i' }}</h1>--->
+       <!--- {{ myDate2|time:'H:i'}}--->
+        <h1 style="font-family: bold;">All Paid Patients</h1>
+
+
+    
+
+        </center>
+     <div class="table-responsive text-nowrap" >
+          
+          <table class="table" id="table">
+            <thead>
+              <tr>
+                
+                <th scope="col"> Name</th>
+                
+                <th scope="col">Time</th>
+                <th scope="col">Paid</th>
+                 <th scope="col">Total</th>
+
+
+                
+                
+                
+                             </tr>
+            </thead>
+            <tbody>
+                {% for object in payment %}
+                {% if object.accepted == True %}
+                                 
+            <tr>
+                <td>{{object.name}}</td>
+                
+                <td>{{object.time_stamp}}</td>
+                <td>{{object.paid}}</td>
+                <td>{{object.total}}/=</td>
+
+
+
+
+          
+                  
+            </tr>
+            {% endif %}
+            
+              {% endfor %}
+
+
+            </tbody>
+          </table>
+
+
+
+
+
+<span id="val" style="font-size: 40px;"></span>
+<script >
+  var table = document.getElementById("table"), sumVal = 0;
+  for(var i=1; i<table.rows.length; i++)
+  {
+    sumVal = sumVal + parseInt(table.rows[i].cells[3].innerHTML);
+  }
+
+  document.getElementById("val").innerHTML = "Total Amount Collected = " + "Tsh." +sumVal +"/=";
+  console.log(sumVal);
+</script>
+
+
+
+
+
+
+
+
+
+
+     </div>
+      </section>
+
+
+</form>
+      
+    </center>
+  </div>
+
+
+
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'hospital/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'hospital/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+
+
+ 
+{% if messages %}
+{% for m in messages %}
+<script >
+  
+  swal.fire({
+    "title": "added successs",
+    "text": "{{m}}",
+    "icon":"successs"
+  })
+</script>
+
+{% endfor %}
+
+{% endif %}
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Home {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+
+</head>
+
+<body style="background-color: rgb(5,5,49);overflow: hidden;">
+ 
+    
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="slider d-flex align-items-center">
+     <div class="container">
+     <h3 style="color: yellow;font-size: 35px;text-align: center;font-weight: bold;font-family: serif;">DISPENSARY MANAGEMENT SYSTEM</h3>
+     <center>
+       <h2 style="color: white;text-align: center;font-size: 23px;background-color: green;padding: 10px;margin-top: 20px;border-radius: 10px;border-top-right-radius: 0px;width: 30%">Dimoso Dispensary</h2>
+       </center>
+     
+    <!----  <a href="#about" class="btn-get-started scrollto">Get Started</a>
+    ---->
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="content" style="background-color: rgb(5,5,49);">
+              <h3>OUR DISPENSARY SYSTEM</h3>
+              <p>
+                Welcome to Our Dispensary System, now you are logged in as {{user.username}}
+                    </p>
+              <div class="text-center">
+              <!---- <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+             ---->
+             
+              </div>
+            </div>
+          </div>
+          
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main><!-- End #main -->
+
+
+
+  
+
+</body>
+
+</html>
+{% endblock %}

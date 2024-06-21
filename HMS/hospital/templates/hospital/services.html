@@ -1,0 +1,94 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% block title %}Services {% endblock %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services</title>
+  <style>
+    body{
+      background-color: rgb(5,5,49);
+  
+}
+  </style>
+</head>
+<body>
+  
+
+    
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+        <center>
+
+        <div class="section-title">
+          <h2>Reception</h2>
+          </div>
+
+
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <a href="{% url 'watoto' %}" >
+        <div class="icon-box">
+              <div class="icon"><i class="fas fa-heartbeat"></i></div>
+              <h4 class="service-name"> WATOTO</h4>
+          
+          </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="{% url 'wazee' %}">
+                 <div class="icon-box">
+              <div class="icon"><i class="fas fa-heartbeat"></i></div>
+              <h4 class="service-name">WAZEE</h4>
+          
+          </div>
+            </a>
+          </div>
+        
+
+
+          <div class="col-md-4">
+            <a href="{% url 'kawaida' %}">
+               <div class="icon-box">
+              <div class="icon"><i class="fas fa-heartbeat"></i></div>
+              <h4 class="service-name">VIJANA</h4>
+          
+          </div>
+           </a> 
+          </div>
+
+
+
+        </div><!--mwisho wa row kubwa--->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</center>
+      </div>
+    </section><!-- End Services Section -->
+
+
+</body>
+</html>
+{% endblock %}

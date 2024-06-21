@@ -1,0 +1,293 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}All Available medicines {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+
+  
+ <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.css' %}">
+
+ 
+</head>
+<body class="slider">
+  
+   
+
+
+  <style>
+    .small-img{
+      width: 70px;
+      height: 70px;
+    }
+    #medicine_name{
+      width: 100%;
+      border-color: green;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    td,th{
+        font-size: 16px;
+        font-family: bold;
+    }
+   
+  </style>
+  <main class="mt-5 pt-4">
+    <div class="container" style="margin-top: 0px;">
+        {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
+
+
+<div class="container " style="margin-top: 30px;">
+
+
+
+  <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+
+          <div class="col-md-12">
+    
+            <div class="row">
+
+              <div class="col-md-4">
+                <h2 style="font-size: 16px;color: red;font-weight: bold;">Search Service:</h2>
+                {{form.ServiceName}}
+    
+              </div>
+
+              
+
+            
+
+
+
+          
+
+ 
+
+              </div>
+              </div>
+              </div>
+        
+
+
+
+
+        <input type="submit" value="Search" class="btn-primary" style="margin-top: 15px;margin-bottom: 15px;padding: 10px;width: 10%;">
+        
+      
+    </form>
+
+   
+
+
+
+
+
+  
+
+
+
+</div>
+
+
+<div>
+  <center>
+  
+
+
+<h1 style="font-size: 18px;font-weight: bold;color: white;font-weight: bold;">ALL DISPENSARY SERVICES</h1>
+
+<h1 style="font-size: 18px;font-weight: bold;color: white;font-weight: bold;margin-top: 15px;background-color: green;padding: 10px;width: 30%;border-radius: 10px;">{{categoryId_name}}</h1>
+
+
+
+
+{% if services %}
+      <section class="mb-4">
+     <div class="table-responsive text-nowrap">
+          
+          <table class="table">
+            <thead>
+              <tr>
+                 <th scope="col">No</th>
+                <th scope="col">Service Name</th>
+               
+                <th scope="col" style="text-align: center;">Service Price</th>
+                <th scope="col" style="text-align: center;">Service Category</th>
+                <th scope="col">Total Quantity</th>
+
+                 <th scope="col">Action</th>
+                              </tr>
+            </thead>
+            <tbody>
+                {% for object in services %}
+                
+            <tr>
+              <td>{{forloop.counter}}</td>
+                <td>{{object.ServiceName}}</td>
+              
+                <td style="background-color: green;color: white;text-align: center;font-size: 22px;font-weight: bold;font-family: serif;border-radius: 3px;">{{object.ServicePrice|floatformat:0|intcomma}}</td>
+                
+                <td style="text-align: center;">{{object.Category}}</td>
+                
+
+<td>{{object.Quantity}}</td>
+
+            <td>
+               <a href="{% url 'update_available_medicines' object.pk %}" >
+            <button class="btn btn-primary patient-list-button" value="Delete">Update</button>
+              </a>
+
+               <a href="{% url 'delete_available_medicines' object.pk %}" >
+            <button class="btn btn-danger patient-list-button" value="Delete">Delete</button>
+              </a>
+
+            </td>
+                 
+                  
+            </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+     </div>
+      </section>
+
+
+      {% else %}
+
+      <h2 style="color: white;font: bold;margin-top: 20px;margin-bottom: 20px;text-align: center;font-size: 16px;">No any service is added</h2>
+
+
+      {% endif %}
+
+      
+    </center>
+  </div>
+
+
+
+
+
+
+
+
+
+
+<!--------------------------PAGINATION-------------------------------------->
+
+  
+<div style="background-color: white;font-size: 18px;color: blue;">
+<center>
+ <h2 style="font-size: 17px;color: black;"> page {{services.number}} of {{services.paginator.num_pages}}</h2>
+{% if services.has_previous %}
+<a href="?page=1" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">   &laquo First</a>
+<a href="?page={{services.previous_page_number}}"style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Previous</a>
+{% endif %}
+
+
+
+{% if services.has_next %}
+<a href="?page={{services.next_page_number}}" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Next</a>
+<a href="?page={{services.paginator.num_pages}}" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Last &raquo</a>
+
+{% endif %}
+
+</center>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'hospital/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'hospital/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+<script >
+  $( function() {
+    
+
+    $("#ServiceName"). autocomplete({
+    source: "{% url 'search_clinic_service_autocomplete' %}"
+  });
+
+
+  } );
+  
+  
+
+</script>
+
+
+
+
+
+ 
+{% if messages %}
+{% for m in messages %}
+<script >
+  
+  swal.fire({
+    "title": "added successs",
+    "text": "{{m}}",
+    "icon":"successs"
+  })
+</script>
+
+{% endfor %}
+
+{% endif %}
+
+</body>
+</html>
+
+{% endblock %}

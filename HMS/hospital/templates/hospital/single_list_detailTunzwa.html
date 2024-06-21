@@ -1,0 +1,428 @@
+
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Patient Detail {% endblock %}
+
+
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style>
+    form input{
+      padding: 10px;
+      border-radius: 10px;
+      
+      margin: 10px;
+      font-size: 16px;
+      color: white;
+      font-weight: bold;
+      
+    }
+    #tag{
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid green;
+      margin: 10px;
+      font-size: 16px;
+      color: white;
+      font-weight: bold;
+      width: 50%;
+
+
+    }
+
+    .header-label{
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
+input[type="checkbox"]{
+  width: 100px;
+  height: 100px;
+}
+
+  </style>
+</head>
+<body class="slider">
+
+<div class="container" style="margin-top: 80px;">
+    {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
+
+
+
+{% if querySet.paid == False %}
+
+
+
+  <!--HIZI NICODE KWA AJILI YA KUACCEPT DAWA AMBZO VIEW YAKE NI ACCEPT MEDICINE-->  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <form action="{% url 'accept_medicine' querySet.id %}" method="post">
+      {% csrf_token %}
+
+      <div style="display: none;">
+      <center>
+        {{form.name}}
+      </center>
+      </div>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <section class="mb-4 mt-2" style="box-shadow: -10px 10px  10px rgba(0,0,0,0.3)">
+
+    
+ <center>       
+<button type="button" class="btn btn-success" style="width: 50%;background-color: blue;margin-bottom: 10px;">
+  Payment for:  {{querySet.name}}
+</button>
+</center> 
+
+
+     <div class="table-responsive text-nowrap" >
+          
+          <table class="table table-bordered" style="box-shadow: -10px 10px  10px rgba(0,0,0,0.3)">
+            <thead>
+              <tr>
+                
+                <th scope="col">Medicine Name</th>
+                
+                <th scope="col">Description</th>
+
+                <th scope="col">Action</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+            {% if querySet.line_one != '' %}    
+            <tr>
+              
+                <td>{{querySet.line_one}}</td>
+                <td>{{querySet.line_one_description}}</td> 
+                <td>
+                 
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#more" style="">
+                  Add
+                </button>
+                </td>
+                                  
+            </tr>
+            {% endif %} 
+
+
+         {% if querySet.line_two != '' %}
+            <tr>
+              
+                <td>{{querySet.line_two}}</td>
+                <td>{{querySet.line_two_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+
+         {% if querySet.line_three != '' %}
+            <tr>
+              
+                <td>{{querySet.line_three}}</td>
+                <td>{{querySet.line_three_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+
+          {% if querySet.line_four != '' %}
+            <tr>
+              
+                <td>{{querySet.line_four}}</td>
+                <td>{{querySet.line_four_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+
+            {% if querySet.line_five != '' %}
+            <tr>
+              
+                <td>{{querySet.line_five}}</td>
+                <td>{{querySet.line_five_description}}</td> 
+                                  
+            </tr>
+            {% endif %} 
+
+            {% if querySet.line_six != '' %}
+            <tr>
+              
+                <td>{{querySet.line_six}}</td>
+                <td>{{querySet.line_six_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             {% if querySet.line_seven != '' %}
+            <tr>
+              
+                <td>{{querySet.line_seven}}</td>
+                <td>{{querySet.line_seven_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+            {% if querySet.line_eight != '' %}
+            <tr>
+              
+                <td>{{querySet.line_eight}}</td>
+                <td>{{querySet.line_eight_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             {% if querySet.line_nine != '' %}
+            <tr>
+              
+                <td>{{querySet.line_nine}}</td>
+                <td>{{querySet.line_nine_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             {% if querySet.line_ten != '' %}
+            <tr>
+              
+                <td>{{querySet.line_ten}}</td>
+                <td>{{querySet.line_ten_description}}</td> 
+                                  
+            </tr>
+            {% endif %}
+
+
+             <tr style="background-color: green;color: white;"> 
+              
+                <td >Total Amount: Tsh.{{querySet.total}}/=</td>
+                <td>
+                  <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#accept" style="">
+                  Accept Patient
+                </button>
+                </td> 
+                                  
+            </tr>
+
+
+
+
+
+                        
+            </tbody>
+          </table>
+     </div>
+      </section>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="row">
+
+     
+
+  <!--  <center>       
+<button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#accept" style="">
+  Accept Patient
+</button>
+</center>  -->
+
+
+<!-- HII NI MODAL KWA AJILI YA KUADD DESCRIPTION NA QUANTITY -->
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="accept" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url({% static 'hospital/assets/img/kkk.jpg' %});background-size: cover;color: white;box-shadow: -10px 10px  10px rgba(0,0,0,0.3);">
+      <div class="modal-header">
+        <h5 style="font-size: 18px;" class="modal-title" id="staticBackdropLabel">Patient Name: {{querySet.name}} </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+    <h3 style="font-size: 18px;color: white;">put a tick to accept this payment!!</h3><br>
+
+
+     <div class="col-md-6">
+       <h3 class="header-label"> 
+       {{form.total.label}} </h3>
+            {{form.total}}
+
+          </div>
+
+          <div class="col-md-6">
+         <h3 class="header-label"> 
+          {{form.paid.label}} </h3> 
+            {{form.paid}}
+
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+
+          <div class="form-group">
+                 
+                    
+           <!--      <input type="date" name="date" class="form-control" >--->
+                 
+                </div>
+                <input hidden=true name="line2-id" value="{{object.id}}">
+
+                    
+           <button type="submit" class="btn btn-primary btn-md my-0 p" name="line2" >
+              Accept
+
+
+               </button>
+
+
+      </div>
+    </div>
+  </div>
+</div><!---mwisho wa modal---->
+
+
+
+
+
+
+
+
+
+</div><!--mwisho wa row ya kudisplay total and paid--->
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+<!--HII NI KWA AJILI YA KUPRINT RECEIPT ZINAANZIA HAPA ----->
+
+{% if querySet.paid == True %}
+<div class="row" style="margin-top: 3cm;box-shadow: -10px 10px  10px rgba(0,0,0,0.3);">
+
+<center>
+  <div class="myimage-container">
+
+    <img src="{% static 'hospital/assets/img/r.jfif' %}" style="border-radius: 30px;height: 6cm;width: 50%;">
+    
+  </div>
+<a href="{% url 'print_patient_details' querySet.id %}" class="btn btn-primary btn-md my-4 " style="padding: 10px 20px 10px 20px;">Print Receipt</a>
+
+</center>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!--NA HZO CODES ZA KUPRINT RECEIPT ZINAISHIA HAPA--->
+</body>
+</html>
+{% endblock %}

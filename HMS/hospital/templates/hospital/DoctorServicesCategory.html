@@ -1,0 +1,77 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% block title %}Lists {% endblock %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Categories</title>
+  <style>
+    body{
+  
+}
+  </style>
+</head>
+<body class="slider">
+  
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services" >
+      <div class="container">
+        <center>
+
+        <div class="section-title" style="margin-top: 30px">
+          <h2 style="color: white;font-weight: bold;">REPORTS</h2>
+          </div>
+
+        <div class="row"style="justify-content: center;align-items: center;align-content: center;">
+          
+
+          <div class="col-md-4 doctor-dawa-dozi" style="">
+        <div class="icon-box">
+              <div class="icon"><i class="fas fa-heartbeat"></i></div>
+              <h4><a href="{% url 'SavedPatients_list' %}">DAWA</a></h4>
+          
+          </div>
+            
+          </div>
+
+
+        
+            
+          
+         
+          <div class="col-md-4 doctor-dawa-dozi">
+             <div class="icon-box">
+              <div class="icon"><i class="fas fa-heartbeat"></i></div>
+              <h4><a href="{% url 'SavedPatients_list_Vipimo' %}">VIPIMO</a></h4>
+          
+          </div>
+            
+          </div>
+         
+
+        </div><!--mwisho wa row kubwa--->
+
+
+
+
+
+</center>
+      </div>
+    </section><!-- End Services Section -->
+
+
+    
+
+
+
+</body>
+</html>
+{% endblock %}

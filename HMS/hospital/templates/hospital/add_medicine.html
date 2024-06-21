@@ -1,0 +1,157 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Add {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+body{
+  background: linear-gradient(90deg, #ff00bf9b 0%, #c6ff6932 43%, #0099ff9d 100%);
+}
+form{
+  padding: 15px;
+  color: black;
+  font-weight: bold;
+}
+.input{
+  width: 8cm;
+  padding: 25px;
+ 
+  border-radius: 20px;
+  
+  
+}
+::placeholder{
+  color: red;
+}
+  </style>
+</head>
+<body>
+  
+
+
+  
+  
+  <div class="container mt-5">
+    <section class="mb-4">
+      <div class="table-responsive text-nowrap">
+           
+           <table class="table">
+             <thead>
+               <tr>
+                 
+                 <th scope="col">First Name</th>
+                 <th scope="col">Second Name</th>
+                 <th scope="col"> Last Name</th>
+                 
+                 <th scope="col">Patient Number</th>
+
+                 <th scope="col">Action</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+                 
+             <tr>
+                 <td>{{object.fname}}</td>
+                 <td>{{object.sname}}</td>
+                 <td>{{object.tname}}</td>
+                 <td>{{object.reg_no}}</td>
+                 
+                 
+                 <td>
+                     <a href="{% url 'medicine_list' object.pk %}" class="btn btn-primary btn-md my-0 p" type="submit">
+                         View
+                         </a>
+                         
+                             
+                            
+                 </td>
+                 
+             </tr>
+            
+             </tbody>
+           </table>
+      </div>
+       </section>
+      </div>
+
+
+
+
+      
+
+  <main class="">
+    <div class="container">
+      {% if messages %}
+    {% for message in messages %}
+      <div style="margin-top:5rem;" class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+
+<div style="margin-top: 5cm;" class="fomu">
+
+    <form action=""method="post">
+        {% csrf_token %}
+        <div class="row">
+        
+
+
+          <div class="col-md-3">
+            {{form.name|as_crispy_field}}
+
+          </div>
+
+          
+          
+         
+          <div class="col-md-3 mt-5">
+            {{form.description|as_crispy_field}}
+
+          </div>
+          <div class="col-md-3 mt-4">
+            {{form.watotoservice|as_crispy_field}}
+
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+        <input type="submit" name="save" class="btn btn-primary btn-md my-0 p mt-4" >
+      </div>
+
+    </form>
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+</div>
+  </main>
+
+
+</body>
+</html>
+{% endblock %}

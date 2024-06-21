@@ -1,0 +1,621 @@
+i'm using django and in my templates i need to filter data using date ranges starting_date and end_date.
+in my django forms i'm creating this form;
+class FilterDoziSearchForm(forms.ModelForm):
+    start_date = forms.DateTimeField(
+        required=False, 
+        widget=forms.TextInput(attrs={'class': 'datepicker'}))
+
+    end_date = forms.DateTimeField(
+        required=False, 
+        widget=forms.TextInput(attrs={'class': 'datepicker'}))
+
+    export_to_CSV = forms.BooleanField(required=False)
+
+    TakenBy = forms.CharField(
+        required=False, 
+        widget=forms.TextInput(attrs={'id': 'doctorName'}))
+
+    
+         
+    class Meta:
+        model = Dozi
+        fields =['TakenBy','start_date','end_date']
+        #fields =['user']
+and also i'm using jquery to get calender date automatically as show below;
+$(document).ready(function () {
+    console.log("DATE");
+
+    // Attach the date picker to elements with the 'datepicker' class
+    $(".datepicker").datepicker({
+        changeYear: true,
+        changeMonth: true,
+        dateFormat: 'yy-mm-dd' // Use 'dateFormat' instead of 'dateformat'
+    });
+    
+    console.log("NEW DATE SELECTED");
+});
+
+after that i'm rendering my form in html template as shown below;
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+
+  
+ <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'hospital/jqueryui/jquery-ui.theme.css' %}">
+
+
+ <!-- Add jQuery UI (optional) -->
+    <link rel="stylesheet" href="{% static 'hospital/assets/jquery/jquery-ui/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hospital/assets/jquery/jquery-ui/jquery-ui.structure.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'hospital/assets/jquery/jquery-ui/jquery-ui.theme.min.css' %}">
+
+<!-- For Js -->
+
+<!-- Add jQuery -->
+<script src="{% static 'hospital/assets/jquery/jquery-3.7.1.min.js' %}"></script>
+
+       
+<script src="{% static 'hospital/assets/jquery/jquery-ui/jquery-ui.min.js' %}"></script>
+       <script src="{% static 'hospital/assets/js/myjs2.js' %}" type="text/javascript"></script>
+
+ 
+</head>
+<body class="slider">
+  
+   
+
+
+  <style>
+    .small-img{
+      width: 70px;
+      height: 70px;
+    }
+    td{
+        font-size: 16px;
+        font-family: bold;
+    }
+
+    .form-label{
+      color: white;
+    }
+  </style>
+  <main class="">
+
+
+    <div class="container" style="margin-top: 80px;">
+        {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
+
+
+
+
+<div>
+  
+
+
+<h1 class="hospital-header-service" style="color: white;text-align: center;">Saved Patients</h1>
+
+
+<!-- mwanzo wa row -->
+<!-- <div class="" style="width: 100%;margin-top: 15px;display: flex;">
+  <a class="btn btn-{% if 'fname' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?fname=True"
+                role="button" style="margin-right: 20px;"><i class="fas fa-sort-alpha-down" style="margin-right: 15px;"></i>
+                Order by Name</a>
+            <a class="btn btn-{% if 'created' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?created=True"
+                role="button" style="margin-right: 20px;"><i class="far fa-clock" style="margin-right: 15px;"></i>Order by  Last Created</a>
+           
+            <a class="btn btn-{% if 'created2' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?created2=True"
+                role="button"><i class="far fa-clock" style="margin-right: 15px;"></i>Order by  First Created</a>
+           
+  
+</div> -->
+<!-- mwisho wa row -->
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+ 
+
+          
+       
+
+<form class="row g-3 registration-form" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+ 
+
+
+
+
+  
+  <div class="col-md-4">
+    <label for="inputPassword4" class="form-label">Filter By Doctor </label><br>
+    {{form.TakenBy}}
+  </div>
+
+
+  <div class="col-md-4">
+    <label for="inputPassword4" class="form-label">Start Date </label><br>
+    {{form.start_date}}
+   <!-- <input type="datetime-local" name="fromdate" placeholder="dd-mm-yyyy " value="" style="border: 1px solid white;border-radius: 10px;padding: 10px;"> -->
+
+  </div>
+
+
+ <div class="col-md-4">
+    <label for="inputPassword4" class="form-label">End Date </label><br>
+    {{form.end_date}}
+   <!-- <input type="datetime-local" name="enddate" placeholder="dd-mm-yyyy " value="" style="border: 1px solid white;border-radius: 10px;padding: 10px;"> -->
+
+  </div>
+
+  
+
+   <div class="col-md-4 mb-0">
+  <label for="inputEmail4" class="reg-form-label">Put a tick to export to CSV </label><br>
+  <div class="custom-checkbox">
+    {{form.export_to_CSV}}   
+  </div>
+</div>
+
+
+
+  <div class="col-md-12">
+
+    <button type="submit" class="btn btn-primary mr-2">Search</button>
+ <a href="{% url 'SavedPatients_list' %}" class="btn btn-success mr-2">
+  Reset
+      </a>
+
+  <!--  <a href="" class="btn btn-secondary mr-2">
+  Save To Pdf
+      </a> -->
+
+
+   
+  </div>
+
+
+  
+
+ 
+ 
+
+ 
+
+
+</form>
+
+</div>
+
+
+
+
+
+
+
+
+
+{% if queryset %}
+
+      <section class="mb-4 mt-2" style="box-shadow: -10px 10px  10px rgba(0,0,0,0.3)">
+     <div class="table-responsive text-nowrap">
+
+      {% if get_sum == 0 and get_sum_filter_date == 0  %}
+       <h2 class="order-main-total">Total Amount Collected: {{ main_total_price|floatformat:0|intcomma }}/=</h2>
+        {% endif %}
+          
+          <table class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">Full Name</th>
+                
+                <th scope="col">Service</th>
+                
+                <th scope="col">Total Amount</th>
+                <th scope="col">Paid</th>
+                <th scope="col">Date</th>
+                
+                
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for object in queryset %}
+              
+                
+            <tr>
+                <td>{{object.name}}</td>
+                
+                <td>{{object.huduma}}</td>
+                
+                <td>{{object.total|floatformat:0|intcomma}}</td>
+                <td>{{object.paid}}</td>
+                <td>{{object.time_stamp}}</td>
+             
+
+                
+                
+
+
+
+
+
+
+
+                 
+               
+               
+                 
+                                    <td> 
+
+
+
+       
+
+        
+
+            <a href="" >
+            <button class="btn btn-danger patient-list-button" value="Delete">Delete</button>
+              </a>
+                        
+          
+
+
+                  </td>
+                  
+            </tr>
+
+           
+
+
+
+            
+              {% endfor %}
+
+               <tr>
+                
+                {% if get_sum  %}
+        <h2 class="order-main-total">Total Amount Collected By <span class="span-price-information">{{username}}:</span> Tsh.{{get_sum.sum|floatformat:0|intcomma}}/=</h2>
+        {% endif %}
+
+              </tr>
+
+
+
+         <tr>
+                
+                {% if get_sum_filter_date  %}
+        <h2 class="order-main-total">Total Amount Collected From <span class="span-price-information">{{start_date}}</span> To <span class="span-price-information">{{end_date}} :</span> Tsh.{{get_sum_filter_date.sum|floatformat:0|intcomma}}/=</h2>
+        {% endif %}
+
+              </tr>
+
+            
+            </tbody>
+          </table>
+     </div>
+      </section>
+
+         {% else %}
+
+           <h4 class="mt-5 pt-4" style="color: white;font-weight: bold;text-align: center;">No any patient  is saved</h4>
+
+
+        
+            
+          
+          {% endif %}
+
+      
+    
+  </div>
+
+
+
+
+
+
+
+
+
+<!--------------------------PAGINATION-------------------------------------->
+
+  <br><br>
+<div style="background-color: white;font-size: 18px;color: blue;">
+<center>
+ <h2 style="font-size: 17px;color: black;"> page {{queryset.number}} of {{queryset.paginator.num_pages}}</h2>
+{% if queryset.has_previous %}
+<a href="?page=1" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">   &laquo First</a>
+<a href="?page={{queryset.previous_page_number}}"style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Previous</a>
+{% endif %}
+
+
+
+{% if queryset.has_next %}
+<a href="?page={{queryset.next_page_number}}" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Next</a>
+<a href="?page={{queryset.paginator.num_pages}}" style="font-weight: bold;text-decoration: none;font-size: 17px;color: blue;margin-right: 20px;">Last &raquo</a>
+
+{% endif %}
+
+</center>
+</div>
+
+
+
+
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'hospital/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'hospital/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+<script >
+  $( function() {
+
+
+    $("#doctorName"). autocomplete({
+    source: "{% url 'search_MyUsers_autocomplete' %}"
+  });
+
+
+
+  } );
+
+  
+
+</script>
+
+
+
+
+
+</body>
+</html>
+
+{% endblock %}
+
+
+So until there everything is working perfectly, but now the problem is i need in my javascripts codes enable me to select both date and time and not only date as functions now. So pass through my codes in both files and show me how to solve that issue. i need a full modified codes.
+i need a full modified codes.
+
+my django views codes are;
+
+    if request.method == "POST":
+        #kwa ajili ya kufilter items and category ktk form
+            
+        #category__icontains=form['category'].value(),
+        TakenBy = form['TakenBy'].value()
+        startDate = form['start_date'].value()
+        endDate = form['end_date'].value()
+
+        
+
+        if (TakenBy != '' and startDate == '' and endDate == ''):
+
+            # selected_user = MyUser.objects.get(id=user)
+            # username = selected_user.username
+            #print(f"USERNAME : {username}")
+            username = TakenBy
+            print(f"USERNAME : {username}")
+
+
+
+
+            
+            queryset = Dozi.objects.all().order_by('-id')
+            queryset = queryset.filter(TakenBy=TakenBy)
+
+            get_sum = queryset.filter(
+                TakenBy=TakenBy
+            ).aggregate(sum=Sum('total'))
+
+            search_term = ''
+            if 'fname' in request.GET:
+                queryset = queryset.order_by('name')
+
+            if 'time_stamp' in request.GET:
+                queryset = queryset.order_by('-time_stamp')
+
+            if 'time_stamp2' in request.GET:
+                queryset = queryset.order_by('time_stamp')
+          
+            paginator = Paginator(queryset, 10)  # Show 6 contacts per page
+            page = request.GET.get('page')
+            queryset = paginator.get_page(page)
+
+
+
+        if (TakenBy != '' and startDate != '' and endDate != ''):
+
+            # selected_user = MyUser.objects.get(id=user)
+            # username = selected_user.username
+            #print(f"USERNAME : {username}")
+            username = TakenBy
+            print(f"USERNAME : {username}")
+
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
+
+            # Adjust the date range by adding one day to the end date
+            end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d') + datetime.timedelta(days=1)
+            
+            print(f"END DATE {end_date}")
+            print(f"START DATE {start_date}")
+
+            queryset = Dozi.objects.all().order_by('-id')
+            queryset = queryset.filter(
+                TakenBy=TakenBy,
+                time_stamp__gte=start_date, 
+                time_stamp__lte=end_date
+
+                )
+
+
+
+            get_sum = queryset.filter(
+                TakenBy=TakenBy,
+                time_stamp__gte=start_date, time_stamp__lte=end_date
+            ).aggregate(sum=Sum('total'))
+
+
+            search_term = ''
+            if 'fname' in request.GET:
+                queryset = queryset.order_by('name')
+
+            if 'time_stamp' in request.GET:
+                queryset = queryset.order_by('-time_stamp')
+
+            if 'time_stamp2' in request.GET:
+                queryset = queryset.order_by('time_stamp')
+          
+            paginator = Paginator(queryset, 10)  # Show 6 contacts per page
+            page = request.GET.get('page')
+            queryset = paginator.get_page(page)
+
+
+
+
+
+        if (TakenBy == '' and startDate != '' and endDate != ''):
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
+
+            # Adjust the date range by adding one day to the end date
+            end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d') + datetime.timedelta(days=1)
+
+            print(f"END DATE {end_date}")
+            print(f"START DATE {start_date}")
+
+            queryset = Dozi.objects.filter(
+                # created__range=[
+
+                #     form['start_date'].value(),
+                #     form['end_date'].value()
+
+                # ]
+                time_stamp__gte=start_date, time_stamp__lte=end_date
+
+
+                                            #product_name__icontains=form['product_name'].value(),
+                                            #product_second_name__icontains=form['product_second_name'].value()
+                                            #last_updated__gte=form['start_date'].value(),
+                                            # last_updated__lte=form['end_date'].value()
+                                            #last_updated__range=[
+                                                #form['start_date'].value(),
+                                                #form['end_date'].value()
+                                            #]
+                )
+            # start_date = request.POST.get('start_date')
+            # end_date = request.POST.get('end_date')
+
+            get_sum_filter_date = queryset.filter(
+                time_stamp__gte=start_date, time_stamp__lte=end_date
+                ).aggregate(sum=Sum('total'))
+
+
+
+
+            search_term = ''
+            if 'fname' in request.GET:
+                queryset = queryset.order_by('name')
+
+            if 'time_stamp' in request.GET:
+                queryset = queryset.order_by('-time_stamp')
+
+            if 'time_stamp2' in request.GET:
+                queryset = queryset.order_by('time_stamp')
+          
+            paginator = Paginator(queryset, 10)  # Show 6 contacts per page
+            page = request.GET.get('page')
+            queryset = paginator.get_page(page)
+
+
+    #hii ni kwa ajili ya kudownload ile page nzima ya stock endapo mtu akiweka tiki kwenye field export to csv
+    if form['export_to_CSV'].value() == True:
+        response = HttpResponse(content_type='text/csv')
+        response['content-Disposition'] = 'attachment; filename="Patients Details.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Patient Full Name','Service', 'Amount Paid', 'Paid Status','Attended date'])
+        instance = queryset
+        for x in queryset:
+            writer.writerow([x.name,x.huduma,x.total, x.paid,x.time_stamp ])
+        return response
+        #ZINAISHIA HAPA ZA KUDOWNLOAD
+
+
+
+    context = {
+        'queryset': queryset,
+        #'all_polls': all_polls,
+        'params': params,
+        'search_term': search_term,
+
+        "form": form,
+        "page":page,
+        "main_total_price":main_total_price,
+        "get_sum":get_sum,
+        "get_sum_filter_date":get_sum_filter_date,
+        "start_date":start_date,
+        "end_date":end_date,
+        "username":username,
+        
+        
+
+    }
+
+    
+
+
+    return render(request, 'hospital/SavedPatients_list.html', context)

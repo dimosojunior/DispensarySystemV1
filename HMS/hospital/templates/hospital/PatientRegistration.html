@@ -1,0 +1,138 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}patients {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>patients</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+<style type="text/css">
+
+  input{
+ 
+  width:80%;
+ /*height:7%;*/
+ border-radius:10px;
+ margin-bottom: 10px;
+ padding: 8px;
+ background-color: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+ border: 2px solid white;
+ color: white;
+}
+
+ form select{
+ 
+  width:80%;
+ /*height:7%;*/
+ border-radius:10px;
+ margin-bottom: 10px;
+ padding: 8px;
+ background-color: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+ border: 2px solid white;
+ color: green;
+}
+
+input::placeholder{
+  color: white;
+
+}
+
+
+
+.content{
+  color:#fff;
+  width:80%
+  height:100%;
+}
+.prince{
+left:50%;
+top:43%;
+transform:translate(-50%, -50%);
+position:absolute;
+/*background-color:white;*/
+letter-spacing:5px;
+height:100%;
+text-align:center;
+width: 50%;
+background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+ color: white;
+box-shadow: -10px 10px  10px rgba(0,0,0,0.3);
+}
+ img{
+    width:70px;
+    height: 70px;
+    border-radius:50%;
+    margin-top: 0px;
+    /*border-color:indigo;*/
+ }
+
+
+.prince h3{
+ color:white;
+}
+ 
+</style>
+
+</head>
+<body class="body-wrapper">
+   <div class="slider">
+       <form method="post">
+         {% csrf_token %}
+     <div class="content">
+       <div class="prince" style="margin-top: 100px;">
+             <figure>
+                 <img src="{% static 'hospital/assets/img/kkk.jpg' %}" alt="logo">
+
+              {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+                 <h3>PATIENT REGISTRATION</h3>
+             </figure>
+
+             {{form.Category}}<br><br>
+
+                {{form.fname}}<br><br>
+               
+               {{form.tname}}<br><br>
+               
+               {{form.year}}<br><br>
+
+               {{form.gender}} <br><br>
+
+               {{form.Address}} <br><br>
+
+                 <button type="submit" class="batani">
+      {% if not object.pk %}
+      save
+      {% else %}
+
+      update
+      {% endif %}
+
+
+  </button>
+
+       </div>
+     </div>
+      </form>
+   </div>
+</body>
+</html>
+
+{% endblock %}
